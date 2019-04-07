@@ -1,0 +1,129 @@
+{% extends "layouts.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block content %}
+
+    <div id="wrapper">
+      <!-- start header -->
+
+      <section id="inner-headline">
+        <div class="container">
+          <div class="row">
+            <div class="span4">
+              <div class="inner-heading">
+                <h2>Story pipeline</h2>
+              </div>
+            </div>
+            <div class="span8">
+              <ul class="breadcrumb">
+                <li><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+                <li><a href="#">Success stories</a> <i class="icon-angle-right"></i></li>
+                <li class="active">Success stories</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="content">
+        <div class="container">
+          <div class="row">
+
+            <div class="span4">
+
+              <aside class="left-sidebar">
+
+                <div class="widget">
+                  <form>
+                    <div class="input-append">
+                      <input class="span2" id="appendedInputButton" type="text" placeholder="Type here">
+                      <button class="btn btn-color" type="submit">Search</button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="widget">
+
+                  <h5 class="widgetheading">Categories</h5>
+                  {% for category in categories %}
+                  <ul class="cat">
+                    <li><i class="icon-angle-right"></i> <a href="#">{{ category|title }}</a><span> (20)</span></li>
+                  </ul>
+                  {% endfor %}
+                </div>
+
+                <div class="widget">
+
+                  <h5 class="widgetheading">Recent stories</h5>
+                  <ul class="cat">
+                    {% for rstory in recent_stories %}
+                    <li><i class="icon-angle-right"></i> <a href="#">{{ rstory.title|title|truncatechars:30 }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+                <!-- <div class="widget">
+
+                  <h5 class="widgetheading">Text widget</h5>
+                  <p>
+                    Lorem ipsum dolor sit amet, quo everti torquatos rationibus an, graeci splendide mel cu. Sed ad vidisse eruditi maluisset, et duo mazim placerat adipiscing.
+                  </p>
+
+                </div> -->
+              </aside>
+            </div>
+
+            <div class="span8">
+
+              {% for success in success_stories %}
+
+              <article>
+                <div class="row">
+
+                  <div class="span8">
+                    <div class="post-quote">
+                      <div class="post-heading">
+                        <h6><a href="{% url 'content:success_detail' story_pk=success.id %}" style="color:grey">{{ success.title }}</a></h6>
+                      </div>
+
+
+                    </div>
+                    <div class="meta-post">
+                      <a href="#" class="author">By<br /> {{ success.author|truncatechars:10 }}</a>
+                      <a href="#" class="date">{{ success.created|date:"M d" }}<br /> {{ success.created|date:"Y" }}</a>
+                    </div>
+                    <div class="post-entry">
+                      <img class="img-responsive img-circle pull-right" src="{% thumbnail success.photo 200x100 crop %}" style="margin-top: -10pt"/></a>
+
+                      <blockquote>
+                        {{ success.content|safe|truncatechars:137 }}
+                      </blockquote>
+
+                      <a href="{% url 'content:success_detail' story_pk=success.id %}" class="btn btn-color"><i class="icon-tags"> {{ success.category }} |</i> Read more <i class="icon-angle-right"></i></a>
+                    </div>
+
+                  </div>
+                </div>
+              </article>
+
+              {% endfor %}
+
+
+
+              <div id="pagination">
+                <span class="all">Page 1 of 3</span>
+                <span class="current">1</span>
+                <a href="#" class="inactive">2</a>
+                <a href="#" class="inactive">3</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+    <a href="#" class="scrollup"><i class="icon-angle-up icon-rounded icon-bglight icon-2x"></i></a>
+
+{% endblock content %}

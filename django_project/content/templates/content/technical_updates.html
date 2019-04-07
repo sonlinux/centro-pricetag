@@ -1,0 +1,63 @@
+{% extends "layouts.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div id="wrapper">
+  <section id="inner-headline">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <div class="inner-heading">
+            <h2>Technical Updates</h2>
+          </div>
+        </div>
+        <div class="span8">
+          <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+            <li><a href="#">smartcare</a> <i class="icon-angle-right"></i></li>
+            <li class="active">Technical Updates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="container">
+      <div class="row">
+
+        <div class="span8">
+          <h4>{{ title }}</h4>
+          <p class="d-inline p-2">
+            {{ content|safe }}
+          </p>
+
+        </div>
+
+        <div class="span4">
+
+          <div class="clearfix"></div>
+            <aside class="right-sidebar">
+
+              <div class="widget">
+                <h5 class="widgetheading" style="color: black;font-weight: normal !important;font-size: 2.4em !important; margin-bottom: 30px;">New Notifications<span></span></h5>
+                  <blockquote>
+                    Coming soon ...
+                  </blockquote>
+              </div>
+            </aside>
+        </div>
+      </div>
+
+      <!-- divider -->
+      <div class="row">
+        <div class="span12">
+          <div class="solidline"></div>
+        </div>
+      </div>
+      <!-- end divider -->
+    </div>
+  </section>
+</div>
+
+{% endblock content %}

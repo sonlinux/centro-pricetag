@@ -1,0 +1,166 @@
+{% extends "layouts.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block content %}
+  <div id="wrapper">
+  <section id="inner-headline">
+    <div class="container">
+      <div class="row">
+        <div class="span6">
+          <div class="inner-heading">
+            <h2> Sponsors, Partners & Hubs</h2>
+          </div>
+        </div>
+        <div class="span6">
+          <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
+            <li><a href="#">smartcare</a> <i class="icon-angle-right"></i></li>
+            <li class="active">Sponsors, Partners & Hubs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">
+    <div class="container">
+      <div class="row">
+
+        <div class="span7">
+          {% for org in orgs %}
+          <div class="post-entry">
+
+            <span class="pull-right" style="padding-bottom: 30pt !important">
+            {% if org.active = True %}
+                  <div class="box pull-right">
+                     <div class="icon">
+                       <span class="badge badge-success badge-circled">active</span>
+                       <!-- <i class="ico icon-cut icon-2x"></i> -->
+                     </div>
+                     <!-- <div class="text">
+                       <h4><strong>Faster load</strong></h4>
+                     </div> -->
+                   </div>
+            {% endif %}
+
+            {% if org.active = False %}
+                  <div class="box">
+                      <div class="icon" >
+                        <span class="badge badge-warning badge-circled">not active</span>
+                        <!-- <i class="ico icon-rocket icon-2x"></i> -->
+                      </div>
+                    </div>
+            {% endif %}
+            </span>
+            <p style="font-size: 1.5em !important;">{{ org.name|upper }}</p>
+
+            <span class="pullquote-left">
+              <div class="row">
+                  <div class="span6">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>
+                            Type
+                          </th>
+                          <th>
+                            Start date - End date
+                          </th>
+                          <th>
+                            Country
+                          </th>
+                          <th>
+
+                          </th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+                        <tr>
+                          <td>
+                            {% if org.partner_type == "PT" %}
+                              Partner
+                            {% endif %}
+
+                            {% if org.partner_type == "SP" %}
+                              Sponsor
+                            {% endif %}
+                          </td>
+                          <td>
+                            {{ org.start_date }} - {{ org.end_date }}
+                          </td>
+                          <td>
+                            {{ org.country.name }}
+                          </td>
+                          <td>
+                            <a href="{{ org.url }}"><img class="img-responsive img-circle pull-right" src="{% thumbnail org.logo 100x60 crop %}" style="margin-bottom:-30pt"/></a>
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+              </div>
+              <p><u>website:</u> <small> <a href="{{ org.url }}" target="_blank">{{ org.url }}</a></small></p>
+
+
+            </span>
+            <article>
+              {{ orgs.content|safe|truncatechars:137 }}
+            </article>
+
+            <!-- <a href="#" class="btn btn-color"><i class="icon-tags"> {{ success.category }} |</i> Read more <i class="icon-angle-right"></i></a> -->
+          </div>
+          {% endfor %}
+
+        </div>  <!-- end span9 -->
+
+        <div class="span5">
+
+          <div class="clearfix"></div>
+            <aside class="right-sidebar">
+
+              <div class="widget">
+                <h6 class="widgetheading" style="color: black;font-weight: normal !important;font-size: 1.8em !important; margin-bottom: 30px;">Hubs<span></span></h6>
+
+
+
+
+
+                <div class="accordion" id="accordion2">
+
+                  {% for hub in hubs %}
+                      <div class="accordion-group">
+                        <div class="accordion-heading">
+                          <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion2" href="#{{ hub.name|slice:":4" }}">
+                    <i class="icon-minus"></i> {{ hub.name|title }}</a>
+                        </div>
+                        <div id="{{ hub.name|slice:":4" }}" class="accordion-body collapse out">
+                          <div class="accordion-inner">
+                            {{ hub.content|safe }}
+                          </div>
+                        </div>
+                      </div>
+                  {% endfor %}
+                </div>
+                <!--end: Accordion -->
+              </div>
+            </aside>
+        </div>
+      </div>
+
+      <!-- divider -->
+      <!-- <div class="row">
+        <div class="span12">
+          <div class="solidline"></div>
+        </div>
+      </div> -->
+      <!-- end divider -->
+    </div>
+  </section>
+</div>
+
+{% endblock content %}
