@@ -10,7 +10,6 @@ __copyright__ = 'Broadreach Corperation'
 import random
 from django.views.generic import TemplateView
 
-from ..models.aboutus import AboutUs, Foreword
 from ..models.success_story import SuccessStory
 from ..models.sponsors import Partner
 from ..models.smartcare import ProjectSummery
@@ -34,7 +33,7 @@ class HomeView(TemplateView):
                                                len(partner_list)))
             random_sponsors = list(random.sample(sponsor_list,
                                                len(sponsor_list)))
-            foreword_qs = Foreword.objects.get(active=True)
+            foreword_qs = []
             project_overview = ProjectSummery.objects.get(active_on_site=True)
 
         except:
