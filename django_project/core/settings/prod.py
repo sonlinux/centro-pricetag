@@ -9,7 +9,7 @@ from .project import *  # noqa
 # Changes for live site
 # ['*'] for testing but not for production
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = ['*'
     'localhost:9000',
     'changelog.pricetag.com']
 
