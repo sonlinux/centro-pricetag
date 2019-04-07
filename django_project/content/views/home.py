@@ -57,13 +57,12 @@ class AboutUsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
         try:
-            aboutus_qs = AboutUs.objects.get(active=True)
-            foreword_qs = Foreword.objects.get(active=True)
+            aboutus_qs = []
+            foreword_qs = []
         except:
             aboutus_qs = ''
             foreword_qs = ''
-        foreword_qs = Foreword.objects.get(active=True)
-        context['aboutus'] = aboutus_qs
-        context['foreword'] = foreword_qs
+        context['aboutus'] = ''
+        context['foreword'] = []
 
         return context

@@ -1,11 +1,11 @@
 
-SmartCare
+Centro-priceTag
 =========
 
-pricetag-website is a Django app powering the main website for pricetag
+pricetag is a Django app powering the main website for pricetag
 health system.
 
-The latest source code is available at http://github.com/sonlinux/pricetag.
+The latest source code is available at http://github.com/sonlinux/centro-pricetag.
 
 * **Developers:** See our `project setup guide`_ and `developer guide`_
 

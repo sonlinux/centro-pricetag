@@ -1,0 +1,189 @@
+{% extends "layouts.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% block content %}
+<!-- section intro -->
+<!-- <section id="intro">
+  <div class="intro-content">
+    <h5 style="color:white; font-weight:bold">Pricetag <i class="icon-stethoscope" style="color:white; font-weight:bold"></i></h5>
+    <p style="color:white">Find anything you need</p>
+    <div style="margin-bottom: -40pt;">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
+        Wondering what we are?
+      </button>
+
+      <style>
+        button{
+              color: #84c75b;
+              }
+        a, a:hover, a:active, a:visited, a:focus {
+                    text-decoration:none;
+                  }
+      </style>
+    </div>
+
+</div>
+</section> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title center" id="exampleModalLongTitle" style="color:#A9A9A9">{{ summery.title|title }}</h5>
+      </div>
+      <div class="modal-body" style="color:#C0C0C0 background-color:silver">
+        {{ summery.content|safe|truncatechars:900 }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <style>
+      .modal-backdrop {
+          z-index: 100000 !important;
+        }
+
+     .modal {
+           z-index: 100001 !important;
+         }
+
+  </style>
+
+
+<!-- /section intro -->
+
+<section id="content">
+  <div class="container">
+
+    <div class="row">
+        <div class="span3">
+          <div class="row">
+            <canvas id="bar-chart" width="1000" height="1500"></canvas>
+
+            <script>
+                  new Chart(document.getElementById("bar-chart"), {
+                    type: 'polarArea',
+                    data: {
+                      labels: ["Construction", "Mining", "Electronics", "Home & Garden", "Fashion", "Real Estate"],
+                      datasets: [
+                        {
+                          label: "Brands",
+                          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#f1c40f"],
+                          data: [130,233,293,354,430,500],
+                          fill: false
+                        }
+                      ]
+                    },
+                    options: {
+                      legend: { display: false },
+                      title: {
+                        display: true,
+                        text: 'Industries we cover'
+                      }
+                    }
+                });
+            </script>
+          </div>
+        </div>
+
+          <div class="span9">
+            <div class="aligncenter">
+              <h3 style="color: black;font-weight: normal !important;font-size: 2.3em !important; margin-bottom: 30px;">RECENT GOODS</h3>
+            </div>
+
+        <div class="row">
+        {% for recent in recent_stories %}
+              <div class="span3">
+                <div class="pricing-box-plain">
+                  <div>
+                    <p><b>
+                      <a href="{% url 'content:success_detail' story_pk=recent.id %}">
+                        {{ recent.title }}
+                      </a>
+                      </b>
+                    </p>
+                    <i><small>Published on: {{ recent.updated|date:"M, d, Y"}}</small></i>
+                  </div>
+
+                  <div class="desc">
+                    <ul>
+                      <p>
+                      <small>
+                          {{ recent.content|truncatechars:240|safe }}
+                      </small>
+                      </p>
+                    </ul>
+                  </div>
+                  <div class="action">
+                    <a href="{% url 'content:success_detail' story_pk=recent.id %}" class="btn btn-info">View more</a>
+                  </div>
+                </div>
+              </div>
+          {% endfor %}
+        </div>
+        <!-- ============= -->
+      </div>
+    </div>
+  </div>  <!-- ==close row wrapper=========== -->
+  <!-- </div> -->
+</section>
+<section id="offer">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <div class="row">
+          <div class="aligncenter">
+            <h3 style="color: black;font-weight: normal !important;font-size: 2.2em !important; margin-bottom: 30px;">INDUSTRIES</h3>
+          </div>
+          <!-- style="color:#84c75b;"  -->
+            {% for partner in sponsors %}
+            <div class="span2">
+              <div class="box aligncenter">
+                <div class="icon">
+                  <img src="{{ partner.logo.url }}" class="img-responsive img-rounded" height='120' width='152' alt="{{ partner.name|upper }}"/>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="span12">
+        <div class="row">
+          <div class="aligncenter">
+            <h3 style="color: black;font-weight: normal !important;font-size: 1.8em !important; margin-bottom: 30px;">OUR COMPANY BRANDS</h3>
+          </div>
+          <!-- style="color:#84c75b;"  -->
+            {% for partner in partners %}
+            <div class="span2">
+              <div class="box aligncenter">
+                <div class="icon">
+                  <img src="{{ partner.logo.url }}" class="img-responsive img-rounded" height='120' width='152' alt="{{ partner.name|upper }}"/>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}
